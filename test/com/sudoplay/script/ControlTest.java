@@ -7,7 +7,7 @@ import org.junit.Test;
 import com.sudoplay.script.interpreter.InputReader;
 import com.sudoplay.script.interpreter.Scheme;
 
-public class ConditionalTest {
+public class ControlTest {
 
   @Test
   public void test() {
@@ -15,7 +15,7 @@ public class ConditionalTest {
     try {
       Scheme scheme = new Scheme();
       scheme.load(this.getClass().getResourceAsStream("unit-test.script"));
-      scheme.load(this.getClass().getResourceAsStream("conditional-test.script"));
+      scheme.load(this.getClass().getResourceAsStream("control-test.script"));
     } catch (Exception e) {
       fail(e.getMessage());
     }
