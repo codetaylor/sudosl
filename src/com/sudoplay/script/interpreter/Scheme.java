@@ -220,10 +220,27 @@ public class Scheme {
           LOG.debug("Leaving eval(): [{}]", result);
           return result;
 
+        } else if (Keyword.DO.equals(fn)) {
+
+          Object predicate = Util.first(args);
+          Closure closure = new Closure(null, Util.rest(args), env);
+          do {
+            closure.apply(this, null);
+          } while (Util.truth(eval(predicate, env)));
+          x = null;
+
+        } else if (Keyword.WHILE.equals(fn)) {
+
+          Object predicate = Util.first(args);
+          Closure closure = new Closure(null, Util.rest(args), env);
+          while (Util.truth(eval(predicate, env))) {
+            closure.apply(this, null);
+          }
+          x = null;
+
         } else if (Keyword.FOR.equals(fn)) {
 
           env = new Environment(env);
-          Object body = null;
 
           Object var = Util.first(args);
           args = Util.rest(args);
@@ -241,7 +258,7 @@ public class Scheme {
             closure.apply(this, val);
             val = eval(operation, env);
           }
-          x = Util.first(body);
+          x = null;
 
         } else if (Keyword.IF.equals(fn)) {
 

@@ -9,6 +9,8 @@ public abstract class Keyword {
   public static final String LOCAL = "local";
   public static final String SET = "=";
   public static final String FOR = "for";
+  public static final String DO = "do";
+  public static final String WHILE = "while";
   public static final String IF = "if";
   public static final String THEN = "then";
   public static final String ELSE = "else";
