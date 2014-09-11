@@ -1,7 +1,0 @@
-function or
-	macro args
-		if (null? args) 
-			#f
-			cons 'cond (map list args)
-			
-print (or (> 5 1) (== 4 3))

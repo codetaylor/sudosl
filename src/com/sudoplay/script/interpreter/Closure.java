@@ -12,7 +12,7 @@ public class Closure extends Procedure {
   public Closure(Object parms, Object body, Environment env) {
     this.parms = parms;
     this.env = env;
-    this.body = (body instanceof Pair && Util.rest(body) == null) ? Util.first(body) : Util.cons("begin", body);
+    this.body = (body instanceof Pair && Util.rest(body) == null) ? Util.first(body) : Util.cons(Keyword.BEGIN, body);
   }
 
   /**

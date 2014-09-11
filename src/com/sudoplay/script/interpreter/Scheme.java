@@ -71,7 +71,7 @@ public class Scheme {
     globalEnvironment.register("eqv?", new EQVQProcedure());
     globalEnvironment.register("eq?", new EQQProcedure());
     globalEnvironment.register("equal?", new EqualQProcedure());
-    
+
     globalEnvironment.register("null?", new NullQProcedure());
 
     globalEnvironment.register("+", new AddProcedure());
@@ -177,20 +177,24 @@ public class Scheme {
         Object args = Util.rest(x);
         LOG.trace("Instance of Procedure: fn=[{}], args=[{}]", fn, args);
 
-        if ("quote".equals(fn)) {
+        if (Keyword.QUOTE.equals(fn)) {
 
           Object result = Util.first(args);
           LOG.debug("Leaving eval(): [{}]", result);
           return result;
 
-        } else if ("begin".equals(fn)) {
+        } else if (Keyword.BEGIN.equals(fn)) {
 
           for (; Util.rest(args) != null; args = Util.rest(args)) {
             eval(Util.first(args), env);
           }
           x = Util.first(args);
 
-        } else if ("function".equals(fn) || "local".equals(fn)) {
+        } else if (Keyword.BLOCK.equals(fn) || Keyword.THEN.equals(fn) || Keyword.ELSE.equals(fn)) {
+
+          x = new Closure(null, Util.rest(args), env);
+
+        } else if (Keyword.FUNCTION.equals(fn) || Keyword.LOCAL.equals(fn)) {
 
           if (Util.first(args) instanceof Pair) {
 
@@ -210,13 +214,13 @@ public class Scheme {
 
           }
 
-        } else if ("=".equals(fn)) {
+        } else if (Keyword.SET.equals(fn)) {
 
           Object result = env.set(Util.first(args), eval(Util.second(args), env));
           LOG.debug("Leaving eval(): [{}]", result);
           return result;
 
-        } else if ("for".equals(fn)) {
+        } else if (Keyword.FOR.equals(fn)) {
 
           env = new Environment(env);
           Object body = null;
@@ -239,19 +243,19 @@ public class Scheme {
           }
           x = Util.first(body);
 
-        } else if ("if".equals(fn)) {
+        } else if (Keyword.IF.equals(fn)) {
 
           x = (Util.truth(eval(Util.first(args), env))) ? Util.second(args) : Util.third(args);
 
-        } else if ("cond".equals(fn)) {
+        } else if (Keyword.COND.equals(fn)) {
 
           x = reduceCond(args, env);
 
-        } else if ("switch".equals(fn)) {
+        } else if (Keyword.SWITCH.equals(fn)) {
 
           x = reduceSwitch(args, env);
 
-        } else if ("lambda".equals(fn)) {
+        } else if (Keyword.LAMBDA.equals(fn)) {
 
           Object result = new Closure(Util.first(args), Util.rest(args), env);
           LOG.debug("Leaving eval(): [{}]", result);
@@ -318,13 +322,13 @@ public class Scheme {
       }
       Object clause = Util.first(clauses);
       clauses = Util.rest(clauses);
-      if ("else".equals(Util.first(clause)) || Util.truth(result = eval(Util.first(clause), env))) {
+      if (Keyword.ELSE.equals(Util.first(clause)) || Util.truth(result = eval(Util.first(clause), env))) {
         if (Util.rest(clause) == null) {
-          return Util.list("quote", result);
+          return Util.list(Keyword.QUOTE, result);
         } else if ("=>".equals(Util.second(clause))) {
-          return Util.list(Util.third(clause), Util.list("quote", result));
+          return Util.list(Util.third(clause), Util.list(Keyword.QUOTE, result));
         } else {
-          return Util.cons("begin", Util.rest(clause));
+          return Util.cons(Keyword.BEGIN, Util.rest(clause));
         }
       }
     }
@@ -338,13 +342,13 @@ public class Scheme {
       }
       Object clause = Util.first(clauses);
       clauses = Util.rest(clauses);
-      if ("default".equals(Util.first(clause)) || Util.truth(result = eval(Util.second(clause), env))) {
+      if (Keyword.DEFAULT.equals(Util.first(clause)) || Util.truth(result = eval(Util.second(clause), env))) {
         if (Util.rest(clause) == null) {
-          return Util.list("quote", result);
+          return Util.list(Keyword.QUOTE, result);
         } else if ("=>".equals(Util.second(clause))) {
-          return Util.list(Util.third(clause), Util.list("quote", result));
+          return Util.list(Util.third(clause), Util.list(Keyword.QUOTE, result));
         } else {
-          return Util.cons("begin", Util.rest(clause));
+          return Util.cons(Keyword.BEGIN, Util.rest(clause));
         }
       }
     }
