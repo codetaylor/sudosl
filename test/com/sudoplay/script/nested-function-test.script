@@ -1,0 +1,7 @@
+; Nested function
+function (Mult x)
+	function (_mult x) ; inline comment!
+		* x 3
+	_mult x
+
+AssertEqual (Mult 4) 12
