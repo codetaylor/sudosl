@@ -7,7 +7,7 @@ import org.junit.Test;
 import com.sudoplay.script.interpreter.InputReader;
 import com.sudoplay.script.interpreter.Scheme;
 
-public class ForLoopTest {
+public class LoopTest {
 
   @Test
   public void test() {
@@ -15,7 +15,7 @@ public class ForLoopTest {
     try {
       Scheme scheme = new Scheme();
       scheme.load(this.getClass().getResourceAsStream("unit-test.script"));
-      scheme.load(this.getClass().getResourceAsStream("for-loop-test.script"));
+      scheme.load(this.getClass().getResourceAsStream("loop-test.script"));
     } catch (Exception e) {
       fail(e.getMessage());
     }
