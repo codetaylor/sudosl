@@ -1,13 +1,13 @@
 ; Unit test functions
 
 function (AssertEqual x y)
-	if (equal? x y) #T 
+	if (equal? x y) true
 		throw "Not equal"
    
 function (AssertTrue x)
-	if (equal? x #T) #T
+	if (equal? x true) true
 		throw "Not true"
    
 function (AssertFalse x)
-	if (equal? x #F) #T
+	if (equal? x false) true
 		throw "Not false"
