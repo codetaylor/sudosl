@@ -22,9 +22,12 @@ public class AddProcedure extends BuiltInProcedure {
       return Util.num(result);
     } else {
       while (args instanceof Pair) {
-        double x = Util.num(Util.first(args));
-        args = Util.rest(args);
-        result += x;
+        Object o = Util.first(args);
+        if (o instanceof Double) {
+          double x = Util.num(o);
+          args = Util.rest(args);
+          result += x;
+        }
       }
       return Util.num(result);
     }
