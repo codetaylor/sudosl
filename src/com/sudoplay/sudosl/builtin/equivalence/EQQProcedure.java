@@ -1,20 +1,20 @@
-package com.sudoplay.sudosl.builtin;
+package com.sudoplay.sudosl.builtin.equivalence;
 
 import com.sudoplay.sudosl.interpreter.BuiltInProcedure;
 import com.sudoplay.sudosl.interpreter.SudoSL;
 import com.sudoplay.sudosl.interpreter.Util;
 
-public class RestProcedure extends BuiltInProcedure {
+public class EQQProcedure extends BuiltInProcedure {
 
-  private static final int MIN_ARGS = 1;
+  private static final int MIN_ARGS = 2;
 
-  public RestProcedure() {
+  public EQQProcedure() {
     super(MIN_ARGS);
   }
 
   @Override
   public Object apply(SudoSL scheme, Object args, Object first, Object second) {
-    return Util.rest(first);
+    return Util.truth(first == second);
   }
 
 }

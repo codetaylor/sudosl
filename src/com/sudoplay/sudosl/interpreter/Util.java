@@ -68,6 +68,30 @@ public abstract class Util {
   }
 
   /**
+   * Like Common Lisp (setf (first ... *
+   */
+  public static Object setFirst(Object x, Object y) {
+    if (x instanceof Pair) {
+      return ((Pair) x).setFirst(y);
+    } else {
+      LOG.error("Attempt to set car of a non-Pair: [{}]", stringify(x));
+      throw new RuntimeException("Attempt to set car of a non-Pair: " + stringify(x));
+    }
+  }
+
+  /**
+   * Like Common Lisp (setf (rest ... *
+   */
+  public static Object setRest(Object x, Object y) {
+    if (x instanceof Pair) {
+      return ((Pair) x).setRest(y);
+    } else {
+      LOG.error("Attempt to set cdr of a non-Pair: [{}]", stringify(x));
+      throw new RuntimeException("Attempt to set cdr of a non-Pair: " + stringify(x));
+    }
+  }
+
+  /**
    * Like Common Lisp second.
    */
   public static Object second(Object x) {
@@ -277,6 +301,66 @@ public abstract class Util {
       }
     }
     return (Pair) rest(result);
+  }
+
+  public static boolean isList(Object x) {
+    Object slow = x, fast = x;
+    for (;;) {
+      if (fast == null) {
+        return true;
+      }
+      if (slow == rest(fast) || !(fast instanceof Pair) || !(slow instanceof Pair)) {
+        return false;
+      }
+      slow = rest(slow);
+      fast = rest(fast);
+      if (fast == null) {
+        return true;
+      }
+      if (!(fast instanceof Pair)) {
+        return false;
+      }
+      fast = rest(fast);
+    }
+  }
+
+  public static Object append(Object args) {
+    if (rest(args) == null) {
+      return first(args);
+    } else {
+      return _append(first(args), append(rest(args)));
+    }
+  }
+
+  private static Object _append(Object x, Object y) {
+    if (x instanceof Pair) {
+      return cons(first(x), _append(rest(x), y));
+    } else {
+      return y;
+    }
+  }
+
+  /**
+   * Reverse the elements of a list. *
+   */
+  public static Object reverse(Object x) {
+    Object result = null;
+    while (x instanceof Pair) {
+      result = cons(first(x), result);
+      x = rest(x);
+    }
+    return result;
+  }
+
+  /**
+   * listStar(args) is like Common Lisp (apply #'list* args) *
+   */
+  public static Object listStar(Object args) {
+    if (rest(args) == null) {
+      return first(args);
+    } else {
+      return cons(first(args), listStar(rest(args)));
+    }
   }
 
 }

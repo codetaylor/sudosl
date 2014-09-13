@@ -90,6 +90,13 @@ public class Environment {
     return this;
   }
 
+  public Environment register(String[] names, BuiltInProcedure procedure) {
+    for (String name : names) {
+      define(name, procedure);
+    }
+    return this;
+  }
+
   @Override
   public String toString() {
     return "Environment [parentEnvironment=" + parentEnvironment + ", mapDataVars=" + mapDataVars + "]";

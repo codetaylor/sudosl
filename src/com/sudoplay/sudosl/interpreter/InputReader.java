@@ -95,6 +95,8 @@ public class InputReader {
       } else if (")".equals(token)) {
         LOG.warn("Extra ')' ignored");
         return read();
+      } else if ("'".equals(token)) {
+        return Util.list("quote", read());
       } else {
         return token;
       }

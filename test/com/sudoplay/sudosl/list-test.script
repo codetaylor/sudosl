@@ -1,0 +1,52 @@
+local x (list 0 1 2 3 4)
+; x = (0 1 2 3 4)
+AssertTrue (list? x)
+AssertTrue (pair? x)
+AssertTrue (== (length x) 5)
+AssertTrue (== (len x) 5)
+
+= x (cons -1 x)
+; x = (-1 0 1 2 3 4)
+AssertTrue (list? x)
+AssertTrue (pair? x)
+AssertTrue (== (length x) 6)
+AssertEqual (apply + x) 9
+
+AssertEqual (car x) -1
+AssertEqual (first x) -1
+
+AssertEqual (apply + (cdr x)) 10
+AssertEqual (apply + (rest x)) 10
+
+AssertEqual (second x) 0
+AssertEqual (third x) 1
+
+= x (append x (list 5 6))
+; x = (-1 0 1 2 3 4 5 6)
+AssertEqual (apply + x) 20
+
+AssertEqual (list-ref x 4) 3
+AssertEqual (get x 5) 4
+
+AssertEqual (apply + (list-tail x 5)) 15
+AssertTrue (null? (list-tail x 10))
+
+AssertFalse (null? x)
+AssertTrue (null? null)
+
+set-first x 40
+; x = (40 0 1 2 3 4 5 6)
+AssertEqual (first x) 40
+
+set-rest x (list 1 1)
+; x = (40 1 1)
+AssertEqual (apply + x) 42
+
+local y (cons 40 2)
+AssertTrue (pair? y)
+AssertFalse (list? y)
+
+= y (pair 2 40)
+AssertTrue (pair? y)
+AssertFalse (list? y)
+AssertEqual (first y) 2

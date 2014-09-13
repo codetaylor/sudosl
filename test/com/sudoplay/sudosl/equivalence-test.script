@@ -1,0 +1,13 @@
+; eqv? test
+AssertTrue (eqv? 42 42)
+
+; eq? test
+AssertFalse (eq? 42 42)
+AssertFalse (eq? "42" "42")
+local x 10
+local y x
+AssertTrue (eq? x y)
+
+; equal? test
+AssertTrue (equal? 42 42)
+AssertTrue (equal? "42" "42")

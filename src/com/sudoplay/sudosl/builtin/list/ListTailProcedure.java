@@ -1,23 +1,23 @@
-package com.sudoplay.sudosl.builtin.eq;
+package com.sudoplay.sudosl.builtin.list;
 
 import com.sudoplay.sudosl.interpreter.BuiltInProcedure;
 import com.sudoplay.sudosl.interpreter.SudoSL;
 import com.sudoplay.sudosl.interpreter.Util;
 
-public class EQVQProcedure extends BuiltInProcedure {
+public class ListTailProcedure extends BuiltInProcedure {
 
   private static final int MIN_ARGS = 2;
 
-  public EQVQProcedure() {
+  public ListTailProcedure() {
     super(MIN_ARGS);
   }
 
   @Override
   public Object apply(SudoSL scheme, Object args, Object first, Object second) {
-    return Util.truth( //
-        first == second //
-            || (first instanceof Double && first.equals(second)) //
-            || (first instanceof Character && first.equals(second)));
+    for (int k = (int) Util.num(second); k > 0; k--) {
+      first = Util.rest(first);
+    }
+    return first;
   }
 
 }

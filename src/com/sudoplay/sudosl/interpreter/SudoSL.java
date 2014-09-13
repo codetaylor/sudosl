@@ -11,18 +11,29 @@ import org.slf4j.LoggerFactory;
 import com.sudoplay.sudosl.builtin.ConsProcedure;
 import com.sudoplay.sudosl.builtin.EvalProcedure;
 import com.sudoplay.sudosl.builtin.ExceptionProcedure;
-import com.sudoplay.sudosl.builtin.FirstProcedure;
-import com.sudoplay.sudosl.builtin.ListProcedure;
 import com.sudoplay.sudosl.builtin.LoadProcedure;
 import com.sudoplay.sudosl.builtin.MapProcedure;
-import com.sudoplay.sudosl.builtin.NullQProcedure;
 import com.sudoplay.sudosl.builtin.PrintProcedure;
-import com.sudoplay.sudosl.builtin.RestProcedure;
 import com.sudoplay.sudosl.builtin.booleans.BooleanQProcedure;
 import com.sudoplay.sudosl.builtin.booleans.NotProcedure;
-import com.sudoplay.sudosl.builtin.eq.EQQProcedure;
-import com.sudoplay.sudosl.builtin.eq.EQVQProcedure;
-import com.sudoplay.sudosl.builtin.eq.EqualQProcedure;
+import com.sudoplay.sudosl.builtin.control.ApplyProcedure;
+import com.sudoplay.sudosl.builtin.equivalence.EQQProcedure;
+import com.sudoplay.sudosl.builtin.equivalence.EQVQProcedure;
+import com.sudoplay.sudosl.builtin.equivalence.EqualQProcedure;
+import com.sudoplay.sudosl.builtin.list.AppendProcedure;
+import com.sudoplay.sudosl.builtin.list.FirstProcedure;
+import com.sudoplay.sudosl.builtin.list.LengthProcedure;
+import com.sudoplay.sudosl.builtin.list.ListProcedure;
+import com.sudoplay.sudosl.builtin.list.ListQProcedure;
+import com.sudoplay.sudosl.builtin.list.ListRefProcedure;
+import com.sudoplay.sudosl.builtin.list.ListTailProcedure;
+import com.sudoplay.sudosl.builtin.list.NullQProcedure;
+import com.sudoplay.sudosl.builtin.list.PairQProcedure;
+import com.sudoplay.sudosl.builtin.list.RestProcedure;
+import com.sudoplay.sudosl.builtin.list.SecondProcedure;
+import com.sudoplay.sudosl.builtin.list.SetCarProcedure;
+import com.sudoplay.sudosl.builtin.list.SetCdrProcedure;
+import com.sudoplay.sudosl.builtin.list.ThirdProcedure;
 import com.sudoplay.sudosl.builtin.numbers.AddAssignmentProcedure;
 import com.sudoplay.sudosl.builtin.numbers.AddProcedure;
 import com.sudoplay.sudosl.builtin.numbers.CompoundAssignmentProcedure;
@@ -60,25 +71,38 @@ public class SudoSL {
     // SECTION 6.1 BOOLEANS
     globalEnvironment.register("not", new NotProcedure());
     globalEnvironment.register("bool?", new BooleanQProcedure());
-    
-    globalEnvironment.register("load", new LoadProcedure());
-    globalEnvironment.register("print", new PrintProcedure());
-    globalEnvironment.register("throw", new ExceptionProcedure());
 
-    globalEnvironment.register("cons", new ConsProcedure());
-    globalEnvironment.register("car", new FirstProcedure());
-    globalEnvironment.register("first", new FirstProcedure());
-    globalEnvironment.register("cdr", new RestProcedure());
-    globalEnvironment.register("rest", new RestProcedure());
-    globalEnvironment.register("list", new ListProcedure());
-    globalEnvironment.register("map", new MapProcedure());
-    globalEnvironment.register("eval", new EvalProcedure());
-
+    // SECTION 6.2 EQUIVALENCE PREDICATES
     globalEnvironment.register("eqv?", new EQVQProcedure());
     globalEnvironment.register("eq?", new EQQProcedure());
     globalEnvironment.register("equal?", new EqualQProcedure());
 
+    // SECTION 6.3 LISTS AND PAIRS
+    globalEnvironment.register("pair?", new PairQProcedure());
+    globalEnvironment.register("list?", new ListQProcedure());
+    globalEnvironment.register(new String[] { "cons", "pair" }, new ConsProcedure());
+    globalEnvironment.register(new String[] { "car", "first" }, new FirstProcedure());
+    globalEnvironment.register(new String[] { "cdr", "rest" }, new RestProcedure());
+    globalEnvironment.register(new String[] { "set-car", "set-first" }, new SetCarProcedure());
+    globalEnvironment.register(new String[] { "set-cdr", "set-rest" }, new SetCdrProcedure());
+    globalEnvironment.register("second", new SecondProcedure());
+    globalEnvironment.register("third", new ThirdProcedure());
     globalEnvironment.register("null?", new NullQProcedure());
+    globalEnvironment.register("list", new ListProcedure());
+    globalEnvironment.register(new String[] { "length", "len" }, new LengthProcedure());
+    globalEnvironment.register("append", new AppendProcedure());
+    globalEnvironment.register(new String[] { "list-ref", "get" }, new ListRefProcedure());
+    globalEnvironment.register("list-tail", new ListTailProcedure());
+
+    // SECTION 6.9 CONTROL FEATURES
+    globalEnvironment.register("apply", new ApplyProcedure());
+
+    globalEnvironment.register("load", new LoadProcedure());
+    globalEnvironment.register("print", new PrintProcedure());
+    globalEnvironment.register("throw", new ExceptionProcedure());
+
+    globalEnvironment.register("map", new MapProcedure());
+    globalEnvironment.register("eval", new EvalProcedure());
 
     globalEnvironment.register("+", new AddProcedure());
     globalEnvironment.register("-", new SubProcedure());
@@ -166,7 +190,10 @@ public class SudoSL {
         // VARIABLE
         LOG.trace("Instance of String: [{}]", x);
         // Look up a variable or a procedure (built in function).
-        Object result = env.lookup((String) x);
+        Object result = null;
+        if (!("null".equals((String) x))) {
+          result = env.lookup((String) x);
+        }
         LOG.debug("Leaving eval(): [{}]", result);
         return result;
 
