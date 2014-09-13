@@ -1,0 +1,12 @@
+AssertTrue (symbol? 'x)
+AssertFalse (symbol? "x")
+AssertTrue (sym? 'x)
+AssertFalse (sym? "x")
+
+local x 10
+AssertEqual (eval (string->symbol "x")) 10
+AssertEqual (eval (str->sym "x")) 10
+
+local index 42
+AssertEqual (symbol->string 'index) "index"
+AssertEqual (sym->str 'index) "index"

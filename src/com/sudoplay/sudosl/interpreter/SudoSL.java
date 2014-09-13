@@ -52,6 +52,9 @@ import com.sudoplay.sudosl.builtin.numbers.MultAssignmentProcedure;
 import com.sudoplay.sudosl.builtin.numbers.MultProcedure;
 import com.sudoplay.sudosl.builtin.numbers.SubAssignmentProcedure;
 import com.sudoplay.sudosl.builtin.numbers.SubProcedure;
+import com.sudoplay.sudosl.builtin.symbols.StringToSymbolProcedure;
+import com.sudoplay.sudosl.builtin.symbols.SymbolQProcedure;
+import com.sudoplay.sudosl.builtin.symbols.SymbolToStringProcedure;
 
 public class SudoSL {
 
@@ -93,6 +96,11 @@ public class SudoSL {
     globalEnvironment.register("append", new AppendProcedure());
     globalEnvironment.register(new String[] { "list-ref", "get" }, new ListRefProcedure());
     globalEnvironment.register("list-tail", new ListTailProcedure());
+
+    // SECTION 6.4 SYMBOLS
+    globalEnvironment.register(new String[] { "symbol?", "sym?" }, new SymbolQProcedure());
+    globalEnvironment.register(new String[] { "symbol->string", "sym->str" }, new SymbolToStringProcedure());
+    globalEnvironment.register(new String[] { "string->symbol", "str->sym" }, new StringToSymbolProcedure());
 
     // SECTION 6.9 CONTROL FEATURES
     globalEnvironment.register("apply", new ApplyProcedure());

@@ -363,4 +363,28 @@ public abstract class Util {
     }
   }
 
+  /**
+   * Coerces a Scheme object to a Scheme symbol, which is a string. *
+   */
+  public static String sym(Object x) {
+    if (x instanceof String) {
+      return (String) x;
+    } else {
+      LOG.error("Expected a symbol, got: [{}]", x);
+      throw new RuntimeException("Expected a symbol, got: " + x);
+    }
+  }
+
+  /**
+   * Coerces a Scheme object to a Scheme string, which is a char[]. *
+   */
+  public static char[] str(Object x) {
+    if (x instanceof char[]) {
+      return (char[]) x;
+    } else {
+      LOG.error("Expected a string, got: [{}]", x);
+      throw new RuntimeException("Expected a string, got: " + x);
+    }
+  }
+
 }
