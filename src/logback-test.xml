@@ -3,7 +3,7 @@
 
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <target>System.out</target>
-    <filter class="com.sudoplay.script.logging.StdOutFilter" />
+    <filter class="com.sudoplay.sudosl.logging.StdOutFilter" />
     <encoder>
       <pattern>%-6relative [%thread] %-5level [%logger{10}#%method:%line] %msg%n</pattern>
     </encoder>
@@ -11,13 +11,13 @@
 
   <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
     <target>System.err</target>
-    <filter class="com.sudoplay.script.logging.ErrOutFilter" />
+    <filter class="com.sudoplay.sudosl.logging.ErrOutFilter" />
     <encoder>
       <pattern>%-6relative [%thread] %-5level [%logger{10}#%method:%line] %msg%n</pattern>
     </encoder>
   </appender>
 
-  <logger name="com.sudoplay.script.interpreter" level="WARN" />
+  <logger name="com.sudoplay.sudosl.interpreter" level="WARN" />
 
   <root level="TRACE">
     <appender-ref ref="STDOUT" />

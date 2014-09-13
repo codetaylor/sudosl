@@ -18,6 +18,8 @@ import com.sudoplay.sudosl.builtin.MapProcedure;
 import com.sudoplay.sudosl.builtin.NullQProcedure;
 import com.sudoplay.sudosl.builtin.PrintProcedure;
 import com.sudoplay.sudosl.builtin.RestProcedure;
+import com.sudoplay.sudosl.builtin.booleans.BooleanQProcedure;
+import com.sudoplay.sudosl.builtin.booleans.NotProcedure;
 import com.sudoplay.sudosl.builtin.eq.EQQProcedure;
 import com.sudoplay.sudosl.builtin.eq.EQVQProcedure;
 import com.sudoplay.sudosl.builtin.eq.EqualQProcedure;
@@ -55,6 +57,10 @@ public class SudoSL {
   public SudoSL(final Environment newGlobalEnvironment) {
     globalEnvironment = newGlobalEnvironment;
 
+    // SECTION 6.1 BOOLEANS
+    globalEnvironment.register("not", new NotProcedure());
+    globalEnvironment.register("bool?", new BooleanQProcedure());
+    
     globalEnvironment.register("load", new LoadProcedure());
     globalEnvironment.register("print", new PrintProcedure());
     globalEnvironment.register("throw", new ExceptionProcedure());

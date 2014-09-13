@@ -1,0 +1,8 @@
+; not test
+AssertTrue (not false)
+AssertFalse (not true)
+
+; bool? test
+AssertTrue (bool? true)
+AssertTrue (bool? false)
+AssertFalse (bool? 42)

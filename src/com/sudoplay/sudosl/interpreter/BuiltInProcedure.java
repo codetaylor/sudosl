@@ -3,7 +3,7 @@ package com.sudoplay.sudosl.interpreter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class BuiltInProcedure extends Procedure implements FunctionConstants {
+public abstract class BuiltInProcedure extends Procedure {
 
   private static final Logger LOG = LoggerFactory.getLogger(BuiltInProcedure.class);
 
