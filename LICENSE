@@ -1,4 +1,4 @@
-Copyright (C) 2013 Jason Taylor.
+Copyright (C) 2014 Jason Taylor.
 Released as open-source under the Apache License, Version 2.0.
 
 // ============================================================================
@@ -6,7 +6,7 @@ Released as open-source under the Apache License, Version 2.0.
 // = https://github.com/codetaylor/sudosl
 // ============================================================================
 
-Copyright (C) 2013 Jason Taylor
+Copyright (C) 2014 Jason Taylor
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -37,12 +37,12 @@ redistribute it to anyone else, subject to the following restrictions:
     consequences of the use of this software, even if they arise from defects 
     in the software.
     
-	The origin of this software must not be misrepresented, either by explicit 
-	claim or by omission.
+    The origin of this software must not be misrepresented, either by explicit 
+    claim or by omission.
 	
-	Altered versions must be plainly marked as such, and must not be 
-	misrepresented as being the original software. Altered versions may be 
-	distributed in packages under other licenses (such as the GNU license).
+    Altered versions must be plainly marked as such, and must not be 
+    misrepresented as being the original software. Altered versions may be 
+    distributed in packages under other licenses (such as the GNU license).
 	
 If you find this software useful, it would be nice if you let me 
 (peter@norvig.com) know about it, and nicer still if you send me modifications
