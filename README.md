@@ -2,7 +2,60 @@
 
 An experiment in JScheme (LISP) without so many damn parentheses.
 
-## The Basics
+## Syntax
+
+### Literals
+
+#### Null
+
+```
+null
+```
+
+#### Booleans
+
+##### True
+
+```
+#t
+#T
+true
+```
+
+##### False
+
+```
+#f
+#F
+false
+```
+
+#### Integer
+
+```
+42
+```
+
+#### Double
+
+```
+42.0
+```
+
+#### Character
+
+```
+#\space   ; literal space
+#\newline ; literal newline
+#\a       ; the 'a' character
+```
+
+#### String
+
+```
+"string"
+symbol
+```
 
 ### Comments
 
