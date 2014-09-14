@@ -1,0 +1,49 @@
+; --------------- character?
+AssertTrue (char? #\a)
+AssertTrue (character? #\a)
+
+; --------------- character-alphabetic?
+AssertTrue (character-alphabetic? #\a)
+AssertTrue (char-alpha? #\a)
+AssertFalse (character-alphabetic? #\5)
+AssertFalse (char-alpha? #\5)
+
+; --------------- character-numeric?
+AssertTrue (character-numeric? #\5)
+AssertTrue (char-num? #\5)
+AssertFalse (character-numeric? #\a)
+AssertFalse (char-num? #\a)
+
+; --------------- character-whitespace?
+AssertTrue (character-whitespace? #\space)
+AssertTrue (char-white? #\space)
+AssertFalse (character-whitespace? #\a)
+AssertFalse (char-white? #\a)
+
+; --------------- character-uppercase?
+AssertTrue (character-uppercase? #\A)
+AssertTrue (char-upper? #\A)
+AssertFalse (character-uppercase? #\a)
+AssertFalse (char-upper? #\a)
+
+; --------------- character-lowercase?
+AssertTrue (character-lowercase? #\a)
+AssertTrue (char-lower? #\a)
+AssertFalse (character-lowercase? #\A)
+AssertFalse (char-lower? #\A)
+
+; --------------- character to integer
+AssertEqual (character->integer #\a) 97
+AssertEqual (char->int #\a) 97
+
+; --------------- integer to character
+AssertEqual (integer->character 97) #\a
+AssertEqual (int->char 97) #\a
+
+; --------------- character-uppercase
+AssertEqual (character-uppercase #\a) #\A
+AssertEqual (char-upper #\a) #\A
+
+; --------------- character-lowercase
+AssertEqual (character-lowercase #\A) #\a
+AssertEqual (char-lower #\A) #\a

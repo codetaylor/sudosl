@@ -213,6 +213,22 @@ public class InputReader {
       case 'f':
       case 'F':
         return Boolean.FALSE;
+      case '\\':
+        ch = inputReader.read();
+        if (ch == 's' || ch == 'S' || ch == 'n' || ch == 'N') {
+          charStack.push(ch);
+          Object token = nextToken();
+          if ("space".equals(token)) {
+            return Util.chr(' ');
+          } else if ("newline".equals(token)) {
+            return Util.chr('\n');
+          } else {
+            tokenStack.push(token);
+            return Util.chr((char) ch);
+          }
+        } else {
+          return Util.chr((char) ch);
+        }
       default:
         LOG.warn("#{} not recognized, ignored", ((char) ch));
         return nextToken();

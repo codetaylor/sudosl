@@ -17,6 +17,16 @@ import com.sudoplay.sudosl.builtin.MapProcedure;
 import com.sudoplay.sudosl.builtin.PrintProcedure;
 import com.sudoplay.sudosl.builtin.booleans.BooleanQProcedure;
 import com.sudoplay.sudosl.builtin.booleans.NotProcedure;
+import com.sudoplay.sudosl.builtin.characters.CharacterAlphaQProcedure;
+import com.sudoplay.sudosl.builtin.characters.CharacterLowercaseProcedure;
+import com.sudoplay.sudosl.builtin.characters.CharacterLowercaseQProcedure;
+import com.sudoplay.sudosl.builtin.characters.CharacterNumericQProcedure;
+import com.sudoplay.sudosl.builtin.characters.CharacterQProcedure;
+import com.sudoplay.sudosl.builtin.characters.CharacterToIntegerProcedure;
+import com.sudoplay.sudosl.builtin.characters.CharacterUppercaseProcedure;
+import com.sudoplay.sudosl.builtin.characters.CharacterUppercaseQProcedure;
+import com.sudoplay.sudosl.builtin.characters.CharacterWhitespaceQProcedure;
+import com.sudoplay.sudosl.builtin.characters.IntegerToCharacterProcedure;
 import com.sudoplay.sudosl.builtin.control.ApplyProcedure;
 import com.sudoplay.sudosl.builtin.equivalence.EQQProcedure;
 import com.sudoplay.sudosl.builtin.equivalence.EQVQProcedure;
@@ -65,15 +75,15 @@ import com.sudoplay.sudosl.builtin.numbers.MaxProcedure;
 import com.sudoplay.sudosl.builtin.numbers.MinProcedure;
 import com.sudoplay.sudosl.builtin.numbers.ModuloAssignmentProcedure;
 import com.sudoplay.sudosl.builtin.numbers.ModuloProcedure;
-import com.sudoplay.sudosl.builtin.numbers.NumberToStringProcedure;
-import com.sudoplay.sudosl.builtin.numbers.RemainderAssignmentProcedure;
-import com.sudoplay.sudosl.builtin.numbers.RemainderProcedure;
 import com.sudoplay.sudosl.builtin.numbers.MultAssignmentProcedure;
 import com.sudoplay.sudosl.builtin.numbers.MultProcedure;
 import com.sudoplay.sudosl.builtin.numbers.NegativeQProcedure;
 import com.sudoplay.sudosl.builtin.numbers.NumberQProcedure;
+import com.sudoplay.sudosl.builtin.numbers.NumberToStringProcedure;
 import com.sudoplay.sudosl.builtin.numbers.OddQProcedure;
 import com.sudoplay.sudosl.builtin.numbers.PositiveQProcedure;
+import com.sudoplay.sudosl.builtin.numbers.RemainderAssignmentProcedure;
+import com.sudoplay.sudosl.builtin.numbers.RemainderProcedure;
 import com.sudoplay.sudosl.builtin.numbers.RoundProcedure;
 import com.sudoplay.sudosl.builtin.numbers.SinProcedure;
 import com.sudoplay.sudosl.builtin.numbers.SqrtProcedure;
@@ -184,6 +194,18 @@ public class SudoSL {
     globalEnvironment.register(new String[] { "expt", "^" }, new ExptProcedure());
     globalEnvironment.register(new String[] { "number->string", "num->str" }, new NumberToStringProcedure());
     globalEnvironment.register(new String[] { "string->number", "str->num" }, new StringToNumberProcedure());
+
+    // SECTION 6.6 CHARACTERS
+    globalEnvironment.register(new String[] { "character?", "char?" }, new CharacterQProcedure());
+    globalEnvironment.register(new String[] { "character-alphabetic?", "char-alpha?" }, new CharacterAlphaQProcedure());
+    globalEnvironment.register(new String[] { "character-numeric?", "char-num?" }, new CharacterNumericQProcedure());
+    globalEnvironment.register(new String[] { "character-whitespace?", "char-white?" }, new CharacterWhitespaceQProcedure());
+    globalEnvironment.register(new String[] { "character-uppercase?", "char-upper?" }, new CharacterUppercaseQProcedure());
+    globalEnvironment.register(new String[] { "character-lowercase?", "char-lower?" }, new CharacterLowercaseQProcedure());
+    globalEnvironment.register(new String[] { "character->integer", "char->int" }, new CharacterToIntegerProcedure());
+    globalEnvironment.register(new String[] { "integer->character", "int->char" }, new IntegerToCharacterProcedure());
+    globalEnvironment.register(new String[] { "character-uppercase", "char-upper" }, new CharacterUppercaseProcedure());
+    globalEnvironment.register(new String[] { "character-lowercase", "char-lower" }, new CharacterLowercaseProcedure());
 
     // SECTION 6.7 STRINGS
     globalEnvironment.register(new String[] { "string-append", "str-append" }, new StringAppendProcedure());

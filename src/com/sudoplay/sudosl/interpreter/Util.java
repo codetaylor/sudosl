@@ -433,4 +433,23 @@ public abstract class Util {
     return result.toString().toCharArray();
   }
 
+  /**
+   * Converts a Scheme object to a char, or calls error. *
+   */
+  public static char chr(Object x) {
+    if (x instanceof Character) {
+      return ((Character) x).charValue();
+    } else {
+      LOG.error("Expected a char, got: [{}]", x);
+      throw new RuntimeException("Expected a char, got: " + x);
+    }
+  }
+
+  /**
+   * Converts a char to a Character. *
+   */
+  public static Character chr(char ch) {
+    return new Character(ch);
+  }
+
 }
