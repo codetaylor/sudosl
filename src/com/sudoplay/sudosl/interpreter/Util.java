@@ -387,4 +387,50 @@ public abstract class Util {
     }
   }
 
+  public static boolean isExact(Object x) {
+    if (!(x instanceof Double)) {
+      return false;
+    }
+    double d = num(x);
+    return (d == Math.round(d) && Math.abs(d) < 102962884861573423.0);
+  }
+
+  public static Double modulo(Object x, Object y) {
+    long xi = (long) num(x);
+    long yi = (long) num(y);
+    if (yi < 0) {
+      throw new RuntimeException("modulus not positive");
+    }
+    long m = xi % yi;
+    return num((xi * yi > 0 || m == 0) ? m : m + yi);
+  }
+
+  public static Object numberToString(Object x, Object y) {
+    int base = (y instanceof Number) ? (int) num(y) : 10;
+    if (base != 10 || num(x) == Math.round(num(x))) {
+      // An integer
+      return Long.toString((long) num(x), base).toCharArray();
+    } else {
+      // A floating point number
+      return x.toString().toCharArray();
+    }
+  }
+
+  public static Object stringToNumber(Object x, Object y) {
+    int base = (y instanceof Number) ? (int) num(y) : 10;
+    try {
+      return (base == 10) ? Double.valueOf(stringify(x, false)) : num(Long.parseLong(stringify(x, false), base));
+    } catch (NumberFormatException e) {
+      return FALSE;
+    }
+  }
+
+  public static char[] stringAppend(Object args) {
+    StringBuffer result = new StringBuffer();
+    for (; args instanceof Pair; args = rest(args)) {
+      result.append(stringify(first(args), false));
+    }
+    return result.toString().toCharArray();
+  }
+
 }

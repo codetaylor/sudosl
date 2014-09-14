@@ -42,6 +42,11 @@ set-rest x (list 1 1)
 ; x = (40 1 1)
 AssertEqual (apply + x) 42
 
+= x (reverse x)
+AssertEqual (first x) 1
+= x (rev x)
+AssertEqual (first x) 40
+
 local y (cons 40 2)
 AssertTrue (pair? y)
 AssertFalse (list? y)

@@ -1,3 +1,65 @@
+; ------------------ number?
+AssertTrue (number? 42)
+AssertTrue (num? 42)
+AssertFalse (number? "42")
+AssertFalse (num? "42")
+
+; ------------------ odd?
+AssertTrue (odd? 3)
+AssertFalse (odd? 4)
+AssertFalse (odd? 0)
+AssertTrue (odd? -3)
+
+; ------------------ even?
+AssertTrue (even? 0)
+AssertTrue (even? 4)
+AssertFalse (even? 5)
+AssertTrue (even? -4)
+
+; ------------------ zero?
+AssertTrue (zero? 0)
+AssertTrue (zero? 0.0)
+AssertFalse (zero? 0.01)
+AssertTrue (0? 0)
+AssertTrue (0? 0.0)
+AssertFalse (0? 0.01)
+
+; ------------------ positive?
+AssertTrue (positive? 42)
+AssertFalse (positive? 0)
+AssertFalse (positive? -42)
+AssertTrue (pos? 42)
+AssertFalse (pos? 0)
+AssertFalse (pos? -42)
+
+; ------------------ negative?
+AssertTrue (negative? -42)
+AssertFalse (negative? 0)
+AssertFalse (negative? 42)
+AssertTrue (neg? -42)
+AssertFalse (neg? 0)
+AssertFalse (neg? 42)
+
+; ------------------ integer?
+AssertTrue (integer? 42)
+AssertTrue (integer? 0)
+AssertTrue (integer? 42.00)
+AssertFalse (integer? 42.01)
+AssertTrue (int? 42)
+AssertTrue (int? 0)
+AssertTrue (int? 42.00)
+AssertFalse (int? 42.01)
+
+; ------------------ min
+AssertEqual (min 64 23 85 34 33) 23
+
+; ------------------ max
+AssertEqual (max 64 23 85 34 33) 85
+
+; ------------------ inexact?
+AssertTrue (inexact? 42.01)
+AssertFalse (inexact? 42.00)
+
 ; ------------------ addition
 AssertEqual (+) 0
 AssertEqual (+ 2 2) 4
@@ -20,10 +82,16 @@ AssertEqual (/ 2) 0.5
 AssertEqual (/ 4 2) 2
 AssertEqual (/ 8 2 2) 2
 
-; ------------------ modulo
-AssertEqual (% 5) 5
+; ------------------ remainder
+AssertEqual (remainder -5 2) -1
+AssertEqual (% 5 2) 1
+AssertEqual (% 5.5 2) 1
 AssertEqual (% 5 5) 0
-AssertEqual (% 25 10 2) 1
+AssertEqual (% 25 10) 5
+
+; ------------------ modulo
+AssertEqual (mod -5 2) 1
+AssertEqual (modulo -10 3) 2
 
 ; ------------------ comparison
 AssertTrue (== 5 5)
@@ -72,10 +140,76 @@ AssertEqual x 5
 /= x 2 2
 AssertEqual x 6
 
-; ------------------ modulo assignment
+; ------------------ remainder assignment
 = x 10
 %= x 4
 AssertEqual x 2
 = x 25
-%= x 10 2
-AssertEqual x 1
+%= x 10
+AssertEqual x 5
+
+; ------------------ mod assignment
+= x 25
+AssertEqual (mod= x 10) 5
+
+; ------------------ abs
+AssertEqual (abs -3) 3
+
+; ------------------ floor
+AssertEqual (floor 3.14) 3
+AssertEqual (floor -3.14) -4
+
+; ------------------ ceil
+AssertEqual (ceil 3.14) 4
+AssertEqual (ceil -3.14) -3
+
+; ------------------ truncate
+AssertEqual (truncate 3.14) 3
+AssertEqual (truncate -3.14) -3
+AssertEqual (trunc 3.14) 3
+AssertEqual (trunc -3.14) -3
+
+; ------------------ round
+AssertEqual (round 3.14) 3
+AssertEqual (round -3.14) -3
+AssertEqual (round 3.56) 4
+AssertEqual (round -3.56) -4
+
+; ------------------ exp
+AssertEqual (exp 2) 7.38905609893065
+
+; ------------------ log
+AssertEqual (log 10) 2.302585092994046
+
+; ------------------ sin
+AssertEqual (sin 45) 0.8509035245341184
+
+; ------------------ cos
+AssertEqual (cos 45) 0.5253219888177297
+
+; ------------------ tan
+AssertEqual (tan 45) 1.6197751905438615
+
+; ------------------ asin
+AssertEqual (asin 0.8509035245341184) 1.0177028497428946
+
+; ------------------ acos
+AssertEqual (acos 0.5253219888177297) 1.0177028497428946
+
+; ------------------ atan
+AssertEqual (atan 1.6197751905438615) 1.0177028497428946
+
+; ------------------ sqrt
+AssertEqual (sqrt 16) 4
+
+; ------------------ expt
+AssertEqual (expt 4 2) 16
+AssertEqual (^ 4 2) 16
+
+; ------------------ number to string
+AssertEqual (number->string 42) "42"
+AssertEqual (num->str 42) "42"
+
+; ------------------ string to number
+AssertEqual (string->number "42") 42
+AssertEqual (str->num "42") 42

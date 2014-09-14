@@ -2,7 +2,7 @@
 
 function (AssertEqual x y)
 	if (equal? x y) true
-		throw "Not equal"
+		throw (str-append "Not equal: " x " != " y)
    
 function (AssertTrue x)
 	if (equal? x true) true
