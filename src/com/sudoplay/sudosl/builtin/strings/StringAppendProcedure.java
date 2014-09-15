@@ -1,4 +1,4 @@
-package com.sudoplay.sudosl.builtin.string;
+package com.sudoplay.sudosl.builtin.strings;
 
 import com.sudoplay.sudosl.interpreter.BuiltInProcedure;
 import com.sudoplay.sudosl.interpreter.SudoSL;

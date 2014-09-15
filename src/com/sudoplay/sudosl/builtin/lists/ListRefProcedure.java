@@ -1,14 +1,14 @@
-package com.sudoplay.sudosl.builtin.list;
+package com.sudoplay.sudosl.builtin.lists;
 
 import com.sudoplay.sudosl.interpreter.BuiltInProcedure;
 import com.sudoplay.sudosl.interpreter.SudoSL;
 import com.sudoplay.sudosl.interpreter.Util;
 
-public class ListTailProcedure extends BuiltInProcedure {
+public class ListRefProcedure extends BuiltInProcedure {
 
   private static final int MIN_ARGS = 2;
 
-  public ListTailProcedure() {
+  public ListRefProcedure() {
     super(MIN_ARGS);
   }
 
@@ -17,7 +17,7 @@ public class ListTailProcedure extends BuiltInProcedure {
     for (int k = (int) Util.num(second); k > 0; k--) {
       first = Util.rest(first);
     }
-    return first;
+    return Util.first(first);
   }
 
 }

@@ -1,20 +1,20 @@
-package com.sudoplay.sudosl.builtin.list;
+package com.sudoplay.sudosl.builtin.lists;
 
 import com.sudoplay.sudosl.interpreter.BuiltInProcedure;
 import com.sudoplay.sudosl.interpreter.SudoSL;
 import com.sudoplay.sudosl.interpreter.Util;
 
-public class ListQProcedure extends BuiltInProcedure {
+public class RestProcedure extends BuiltInProcedure {
 
   private static final int MIN_ARGS = 1;
 
-  public ListQProcedure() {
+  public RestProcedure() {
     super(MIN_ARGS);
   }
 
   @Override
   public Object apply(SudoSL scheme, Object args, Object first, Object second) {
-    return Util.truth(Util.isList(first));
+    return Util.rest(first);
   }
 
 }

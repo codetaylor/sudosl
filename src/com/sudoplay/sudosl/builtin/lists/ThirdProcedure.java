@@ -1,20 +1,20 @@
-package com.sudoplay.sudosl.builtin.list;
+package com.sudoplay.sudosl.builtin.lists;
 
 import com.sudoplay.sudosl.interpreter.BuiltInProcedure;
 import com.sudoplay.sudosl.interpreter.SudoSL;
 import com.sudoplay.sudosl.interpreter.Util;
 
-public class SetCdrProcedure extends BuiltInProcedure {
+public class ThirdProcedure extends BuiltInProcedure {
 
-  private static final int MIN_ARGS = 2;
+  private static final int MIN_ARGS = 1;
 
-  public SetCdrProcedure() {
+  public ThirdProcedure() {
     super(MIN_ARGS);
   }
 
   @Override
   public Object apply(SudoSL scheme, Object args, Object first, Object second) {
-    return Util.setRest(first, second);
+    return Util.third(first);
   }
 
 }
