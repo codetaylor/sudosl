@@ -1,0 +1,43 @@
+; ------------------ string?
+AssertTrue (string? "string")
+AssertTrue (str? "string")
+AssertFalse (string? #\a)
+AssertFalse (string? 42)
+
+; ------------------ make-string
+AssertEqual (make-string 10 #\a) "aaaaaaaaaa"
+AssertEqual (make-str 10 #\a) "aaaaaaaaaa"
+
+; ------------------ string
+AssertEqual (string #\s #\t #\r #\i #\n #\g) "string"
+
+; ------------------ string-length
+AssertEqual (string-length "aaaaa") 5
+AssertEqual (str-len "aaaaa") 5
+
+; ------------------ string-ref
+AssertEqual (string-ref "abcdef" 2) #\c
+AssertEqual (str-ref "abcdef" 2) #\c
+
+; ------------------ string-set
+local s "aaaaa"
+string-set s 2 #\c
+AssertEqual s "aacaa"
+str-set s 4 #\D
+AssertEqual s "aacaD"
+
+; ------------------ substring
+AssertEqual (substring "Hamburger" 0 3) "Ham"
+AssertEqual (substr "Hamburger" 0 3) "Ham"
+
+; ------------------ string-append
+AssertEqual (string-append "Ham" "bur" "ger") "Hamburger"
+AssertEqual (str-append "Ham" "bur" "ger") "Hamburger"
+
+; ------------------ string->list
+AssertEqual (first (string->list "Ham")) #\H
+AssertEqual (first (str->list "Ham")) #\H
+
+; ------------------ list->string
+AssertEqual (list->string (list #\H #\a #\m)) "Ham"
+AssertEqual (list->str (list #\H #\a #\m)) "Ham"

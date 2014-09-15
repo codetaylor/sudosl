@@ -93,7 +93,16 @@ import com.sudoplay.sudosl.builtin.numbers.SubProcedure;
 import com.sudoplay.sudosl.builtin.numbers.TanProcedure;
 import com.sudoplay.sudosl.builtin.numbers.TruncateProcedure;
 import com.sudoplay.sudosl.builtin.numbers.ZeroQProcedure;
+import com.sudoplay.sudosl.builtin.strings.ListToStringProcedure;
+import com.sudoplay.sudosl.builtin.strings.MakeStringProcedure;
 import com.sudoplay.sudosl.builtin.strings.StringAppendProcedure;
+import com.sudoplay.sudosl.builtin.strings.StringLengthProcedure;
+import com.sudoplay.sudosl.builtin.strings.StringProcedure;
+import com.sudoplay.sudosl.builtin.strings.StringQProcedure;
+import com.sudoplay.sudosl.builtin.strings.StringRefProcedure;
+import com.sudoplay.sudosl.builtin.strings.StringSetProcedure;
+import com.sudoplay.sudosl.builtin.strings.StringToListProcedure;
+import com.sudoplay.sudosl.builtin.strings.SubstringProcedure;
 import com.sudoplay.sudosl.builtin.symbols.StringToSymbolProcedure;
 import com.sudoplay.sudosl.builtin.symbols.SymbolQProcedure;
 import com.sudoplay.sudosl.builtin.symbols.SymbolToStringProcedure;
@@ -208,7 +217,16 @@ public class SudoSL {
     globalEnvironment.register(new String[] { "character-lowercase", "char-lower" }, new CharacterLowercaseProcedure());
 
     // SECTION 6.7 STRINGS
+    globalEnvironment.register(new String[] { "string?", "str?" }, new StringQProcedure());
+    globalEnvironment.register(new String[] { "make-string", "make-str" }, new MakeStringProcedure());
+    globalEnvironment.register(new String[] { "string", "str" }, new StringProcedure());
+    globalEnvironment.register(new String[] { "string-length", "str-len" }, new StringLengthProcedure());
+    globalEnvironment.register(new String[] { "string-ref", "str-ref" }, new StringRefProcedure());
+    globalEnvironment.register(new String[] { "string-set", "str-set" }, new StringSetProcedure());
+    globalEnvironment.register(new String[] { "substring", "substr" }, new SubstringProcedure());
     globalEnvironment.register(new String[] { "string-append", "str-append" }, new StringAppendProcedure());
+    globalEnvironment.register(new String[] { "string->list", "str->list" }, new StringToListProcedure());
+    globalEnvironment.register(new String[] { "list->string", "list->str" }, new ListToStringProcedure());
 
     // SECTION 6.9 CONTROL FEATURES
     globalEnvironment.register("apply", new ApplyProcedure());

@@ -223,7 +223,7 @@ public class InputReader {
           } else if ("newline".equals(token)) {
             return Util.chr('\n');
           } else {
-            tokenStack.push(token);
+            //tokenStack.push(token);
             return Util.chr((char) ch);
           }
         } else {

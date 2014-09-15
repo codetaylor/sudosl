@@ -452,4 +452,16 @@ public abstract class Util {
     return new Character(ch);
   }
 
+  /**
+   * Convert a list of characters to a Scheme string, which is a char[]. *
+   */
+  public static char[] listToString(Object chars) {
+    char[] str = new char[length(chars)];
+    for (int i = 0; chars instanceof Pair; i++) {
+      str[i] = chr(first(chars));
+      chars = rest(chars);
+    }
+    return str;
+  }
+
 }
