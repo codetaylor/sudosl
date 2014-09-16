@@ -181,3 +181,58 @@ cond
     <expression>
     <expression>
 ```
+
+### Looping
+
+Loops can be created with the `for` keyword.
+
+```
+for <var-name> <var-initial-value> (<predicate>) (<operation>)
+  <expression>
+  <expression>
+```
+
+A new environment (scope) is created and the variable provided is initialized to the initial value provided. The predicate is evaluated at the beginning of the loop and the operation is performed at the end of the loop.
+
+In practice, it might look like this:
+
+```
+for i 0 (< i 10) (++ i)
+  print i
+```
+
+Loops can also be created with the `while` keyword.
+
+```
+while (<predicate>)
+  <expression>
+  <expression>
+```
+
+Like the `for` keyword, a new environment is created and the predicate is evaluated at the beginning of the loop.
+
+`while` loops could look like this:
+
+```
+while (< i 10)
+  print i
+  ++ i
+```
+
+Finally, loops can be created with the `do` keyword.
+
+```
+do (<predicate>)
+  <expression>
+  <expression>
+```
+
+Loops created with the `do` keyword behave exactly like loops created with the `while` keyword with one difference: `do` loops evaluate the predicate at the end of the loop instead of the beginning.
+
+`do` loops could look like this:
+
+```
+do (< i 10)
+  print i
+  ++ i
+```
