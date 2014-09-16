@@ -1,0 +1,40 @@
+; vector?
+AssertTrue (vector? (vector 1 1 2))
+AssertTrue (vec? (vec 1 1 2))
+
+; make-vector
+AssertEqual (vector-ref (make-vector 10 4) 5) 4
+AssertEqual (vec-ref (make-vec 10 4) 5) 4
+
+; vector
+AssertTrue (vector? (vector 1 1 2))
+AssertTrue (vec? (vec 1 1 2))
+
+; vector-length
+AssertEqual (vector-length (vec 1 1 2)) 3
+AssertEqual (vec-len (vec 1 1 2)) 3
+
+; vector-ref
+AssertEqual (vector-ref (vec 1 1 2) 2) 2
+AssertEqual (vec-ref (vec 1 1 2) 2) 2
+
+; vector-set
+local v (vec 1 1 2)
+vector-set v 1 3
+AssertEqual (vec-ref v 1) 3
+vec-set v 0 5
+AssertEqual (vec-ref v 0) 5
+
+; vector->list
+= v (vec 1 1 2)
+local l (vector->list v)
+AssertTrue (list? l)
+AssertEqual (get l 1) 1
+= l (vec->list v)
+AssertTrue (list? l)
+AssertEqual (get l 1) 1
+
+; list->vector
+= v (list->vector (list 3 5 8))
+AssertTrue (vec? v)
+AssertEqual (vec-ref v 1) 5

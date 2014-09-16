@@ -464,4 +464,45 @@ public abstract class Util {
     return str;
   }
 
+  /**
+   * Convert a list of Objects to a Scheme vector, which is a Object[]. *
+   */
+  public static Object[] listToVector(Object objs) {
+    Object[] vec = new Object[length(objs)];
+    for (int i = 0; objs instanceof Pair; i++) {
+      vec[i] = first(objs);
+      objs = rest(objs);
+    }
+    return vec;
+  }
+
+  /**
+   * Coerces a Scheme object to a Scheme vector, which is a Object[]. *
+   */
+  public static Object[] vec(Object x) {
+    if (x instanceof Object[]) {
+      return (Object[]) x;
+    } else {
+      LOG.error("Expected a vector, got: [{}]", x);
+      throw new RuntimeException("Expected a vector, got: " + x);
+    }
+  }
+
+  /**
+   * Convert a vector to a List. *
+   */
+  public static Pair vectorToList(Object x) {
+    if (x instanceof Object[]) {
+      Object[] vec = (Object[]) x;
+      Pair result = null;
+      for (int i = vec.length - 1; i >= 0; i--) {
+        result = cons(vec[i], result);
+      }
+      return result;
+    } else {
+      LOG.error("Expected a vector, got: [{}]", x);
+      throw new RuntimeException("Expected a vector, got: " + x);
+    }
+  }
+
 }

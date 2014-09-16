@@ -106,6 +106,14 @@ import com.sudoplay.sudosl.builtin.strings.SubstringProcedure;
 import com.sudoplay.sudosl.builtin.symbols.StringToSymbolProcedure;
 import com.sudoplay.sudosl.builtin.symbols.SymbolQProcedure;
 import com.sudoplay.sudosl.builtin.symbols.SymbolToStringProcedure;
+import com.sudoplay.sudosl.builtin.vectors.ListToVectorProcedure;
+import com.sudoplay.sudosl.builtin.vectors.MakeVectorProcedure;
+import com.sudoplay.sudosl.builtin.vectors.VectorLengthProcedure;
+import com.sudoplay.sudosl.builtin.vectors.VectorProcedure;
+import com.sudoplay.sudosl.builtin.vectors.VectorQProcedure;
+import com.sudoplay.sudosl.builtin.vectors.VectorRefProcedure;
+import com.sudoplay.sudosl.builtin.vectors.VectorSetProcedure;
+import com.sudoplay.sudosl.builtin.vectors.VectorToListProcedure;
 
 public class SudoSL {
 
@@ -227,6 +235,16 @@ public class SudoSL {
     globalEnvironment.register(new String[] { "string-append", "str-append" }, new StringAppendProcedure());
     globalEnvironment.register(new String[] { "string->list", "str->list" }, new StringToListProcedure());
     globalEnvironment.register(new String[] { "list->string", "list->str" }, new ListToStringProcedure());
+
+    // SECTION 6.8 VECTORS
+    globalEnvironment.register(new String[] { "vector?", "vec?" }, new VectorQProcedure());
+    globalEnvironment.register(new String[] { "make-vector", "make-vec" }, new MakeVectorProcedure());
+    globalEnvironment.register(new String[] { "vector", "vec" }, new VectorProcedure());
+    globalEnvironment.register(new String[] { "vector-length", "vec-len" }, new VectorLengthProcedure());
+    globalEnvironment.register(new String[] { "vector-ref", "vec-ref" }, new VectorRefProcedure());
+    globalEnvironment.register(new String[] { "vector-set", "vec-set" }, new VectorSetProcedure());
+    globalEnvironment.register(new String[] { "vector->list", "vec->list" }, new VectorToListProcedure());
+    globalEnvironment.register(new String[] { "list->vector", "list->vec" }, new ListToVectorProcedure());
 
     // SECTION 6.9 CONTROL FEATURES
     globalEnvironment.register("apply", new ApplyProcedure());
