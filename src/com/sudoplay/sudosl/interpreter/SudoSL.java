@@ -144,34 +144,34 @@ public class SudoSL {
     // SECTION 6.3 LISTS AND PAIRS
     globalEnvironment.register("pair?", new PairQProcedure());
     globalEnvironment.register("list?", new ListQProcedure());
-    globalEnvironment.register(new String[] { "cons", "pair" }, new ConsProcedure());
-    globalEnvironment.register(new String[] { "car", "first" }, new FirstProcedure());
-    globalEnvironment.register(new String[] { "cdr", "rest" }, new RestProcedure());
-    globalEnvironment.register(new String[] { "set-car", "set-first" }, new SetCarProcedure());
-    globalEnvironment.register(new String[] { "set-cdr", "set-rest" }, new SetCdrProcedure());
+    globalEnvironment.register("cons", "pair", new ConsProcedure());
+    globalEnvironment.register("car", "first", new FirstProcedure());
+    globalEnvironment.register("cdr", "rest", new RestProcedure());
+    globalEnvironment.register("set-car", "set-first", new SetCarProcedure());
+    globalEnvironment.register("set-cdr", "set-rest", new SetCdrProcedure());
     globalEnvironment.register("second", new SecondProcedure());
     globalEnvironment.register("third", new ThirdProcedure());
     globalEnvironment.register("null?", new NullQProcedure());
     globalEnvironment.register("list", new ListProcedure());
-    globalEnvironment.register(new String[] { "length", "len" }, new LengthProcedure());
+    globalEnvironment.register("length", "len", new LengthProcedure());
     globalEnvironment.register("append", new AppendProcedure());
-    globalEnvironment.register(new String[] { "list-ref", "get" }, new ListRefProcedure());
+    globalEnvironment.register("list-ref", "get", new ListRefProcedure());
     globalEnvironment.register("list-tail", new ListTailProcedure());
-    globalEnvironment.register(new String[] { "reverse", "rev" }, new ReverseProcedure());
+    globalEnvironment.register("reverse", "rev", new ReverseProcedure());
 
     // SECTION 6.4 SYMBOLS
-    globalEnvironment.register(new String[] { "symbol?", "sym?" }, new SymbolQProcedure());
-    globalEnvironment.register(new String[] { "symbol->string", "sym->str" }, new SymbolToStringProcedure());
-    globalEnvironment.register(new String[] { "string->symbol", "str->sym" }, new StringToSymbolProcedure());
+    globalEnvironment.register("symbol?", "sym?", new SymbolQProcedure());
+    globalEnvironment.register("symbol->string", "sym->str", new SymbolToStringProcedure());
+    globalEnvironment.register("string->symbol", "str->sym", new StringToSymbolProcedure());
 
     // SECTION 6.5 NUMBERS
-    globalEnvironment.register(new String[] { "number?", "num?" }, new NumberQProcedure());
+    globalEnvironment.register("number?", "num?", new NumberQProcedure());
     globalEnvironment.register("odd?", new OddQProcedure());
     globalEnvironment.register("even?", new EvenQProcedure());
-    globalEnvironment.register(new String[] { "zero?", "0?" }, new ZeroQProcedure());
-    globalEnvironment.register(new String[] { "positive?", "pos?" }, new PositiveQProcedure());
-    globalEnvironment.register(new String[] { "negative?", "neg?" }, new NegativeQProcedure());
-    globalEnvironment.register(new String[] { "integer?", "int?" }, new IntegerQProcedure());
+    globalEnvironment.register("zero?", "0?", new ZeroQProcedure());
+    globalEnvironment.register("positive?", "pos?", new PositiveQProcedure());
+    globalEnvironment.register("negative?", "neg?", new NegativeQProcedure());
+    globalEnvironment.register("integer?", "int?", new IntegerQProcedure());
     globalEnvironment.register("inexact?", new InExactQProcedure());
     globalEnvironment.register("min", new MinProcedure());
     globalEnvironment.register("max", new MaxProcedure());
@@ -179,8 +179,8 @@ public class SudoSL {
     globalEnvironment.register("-", new SubProcedure());
     globalEnvironment.register("*", new MultProcedure());
     globalEnvironment.register("/", new DivProcedure());
-    globalEnvironment.register(new String[] { "remainder", "%" }, new RemainderProcedure());
-    globalEnvironment.register(new String[] { "modulo", "mod" }, new ModuloProcedure());
+    globalEnvironment.register("remainder", "%", new RemainderProcedure());
+    globalEnvironment.register("modulo", "mod", new ModuloProcedure());
     globalEnvironment.register("<", new LTProcedure());
     globalEnvironment.register(">", new GTProcedure());
     globalEnvironment.register("<=", new LEProcedure());
@@ -193,11 +193,11 @@ public class SudoSL {
     globalEnvironment.register("*=", new MultAssignmentProcedure());
     globalEnvironment.register("/=", new DivAssignmentProcedure());
     globalEnvironment.register("%=", new RemainderAssignmentProcedure());
-    globalEnvironment.register(new String[] { "modulo=", "mod=" }, new ModuloAssignmentProcedure());
+    globalEnvironment.register("modulo=", "mod=", new ModuloAssignmentProcedure());
     globalEnvironment.register("abs", new AbsProcedure());
     globalEnvironment.register("floor", new FloorProcedure());
     globalEnvironment.register("ceil", new CeilProcedure());
-    globalEnvironment.register(new String[] { "truncate", "trunc" }, new TruncateProcedure());
+    globalEnvironment.register("truncate", "trunc", new TruncateProcedure());
     globalEnvironment.register("round", new RoundProcedure());
     globalEnvironment.register("exp", new ExpProcedure());
     globalEnvironment.register("log", new LogProcedure());
@@ -208,43 +208,43 @@ public class SudoSL {
     globalEnvironment.register("acos", new AcosProcedure());
     globalEnvironment.register("atan", new AtanProcedure());
     globalEnvironment.register("sqrt", new SqrtProcedure());
-    globalEnvironment.register(new String[] { "expt", "^" }, new ExptProcedure());
-    globalEnvironment.register(new String[] { "number->string", "num->str" }, new NumberToStringProcedure());
-    globalEnvironment.register(new String[] { "string->number", "str->num" }, new StringToNumberProcedure());
+    globalEnvironment.register("expt", "^", new ExptProcedure());
+    globalEnvironment.register("number->string", "num->str", new NumberToStringProcedure());
+    globalEnvironment.register("string->number", "str->num", new StringToNumberProcedure());
 
     // SECTION 6.6 CHARACTERS
-    globalEnvironment.register(new String[] { "character?", "char?" }, new CharacterQProcedure());
-    globalEnvironment.register(new String[] { "character-alphabetic?", "char-alpha?" }, new CharacterAlphaQProcedure());
-    globalEnvironment.register(new String[] { "character-numeric?", "char-num?" }, new CharacterNumericQProcedure());
-    globalEnvironment.register(new String[] { "character-whitespace?", "char-white?" }, new CharacterWhitespaceQProcedure());
-    globalEnvironment.register(new String[] { "character-uppercase?", "char-upper?" }, new CharacterUppercaseQProcedure());
-    globalEnvironment.register(new String[] { "character-lowercase?", "char-lower?" }, new CharacterLowercaseQProcedure());
-    globalEnvironment.register(new String[] { "character->integer", "char->int" }, new CharacterToIntegerProcedure());
-    globalEnvironment.register(new String[] { "integer->character", "int->char" }, new IntegerToCharacterProcedure());
-    globalEnvironment.register(new String[] { "character-uppercase", "char-upper" }, new CharacterUppercaseProcedure());
-    globalEnvironment.register(new String[] { "character-lowercase", "char-lower" }, new CharacterLowercaseProcedure());
+    globalEnvironment.register("character?", "char?", new CharacterQProcedure());
+    globalEnvironment.register("character-alphabetic?", "char-alpha?", new CharacterAlphaQProcedure());
+    globalEnvironment.register("character-numeric?", "char-num?", new CharacterNumericQProcedure());
+    globalEnvironment.register("character-whitespace?", "char-white?", new CharacterWhitespaceQProcedure());
+    globalEnvironment.register("character-uppercase?", "char-upper?", new CharacterUppercaseQProcedure());
+    globalEnvironment.register("character-lowercase?", "char-lower?", new CharacterLowercaseQProcedure());
+    globalEnvironment.register("character->integer", "char->int", new CharacterToIntegerProcedure());
+    globalEnvironment.register("integer->character", "int->char", new IntegerToCharacterProcedure());
+    globalEnvironment.register("character-uppercase", "char-upper", new CharacterUppercaseProcedure());
+    globalEnvironment.register("character-lowercase", "char-lower", new CharacterLowercaseProcedure());
 
     // SECTION 6.7 STRINGS
-    globalEnvironment.register(new String[] { "string?", "str?" }, new StringQProcedure());
-    globalEnvironment.register(new String[] { "make-string", "make-str" }, new MakeStringProcedure());
-    globalEnvironment.register(new String[] { "string", "str" }, new StringProcedure());
-    globalEnvironment.register(new String[] { "string-length", "str-len" }, new StringLengthProcedure());
-    globalEnvironment.register(new String[] { "string-ref", "str-ref" }, new StringRefProcedure());
-    globalEnvironment.register(new String[] { "string-set", "str-set" }, new StringSetProcedure());
-    globalEnvironment.register(new String[] { "substring", "substr" }, new SubstringProcedure());
-    globalEnvironment.register(new String[] { "string-append", "str-append" }, new StringAppendProcedure());
-    globalEnvironment.register(new String[] { "string->list", "str->list" }, new StringToListProcedure());
-    globalEnvironment.register(new String[] { "list->string", "list->str" }, new ListToStringProcedure());
+    globalEnvironment.register("string?", "str?", new StringQProcedure());
+    globalEnvironment.register("make-string", "make-str", new MakeStringProcedure());
+    globalEnvironment.register("string", "str", new StringProcedure());
+    globalEnvironment.register("string-length", "str-len", new StringLengthProcedure());
+    globalEnvironment.register("string-ref", "str-ref", new StringRefProcedure());
+    globalEnvironment.register("string-set", "str-set", new StringSetProcedure());
+    globalEnvironment.register("substring", "substr", new SubstringProcedure());
+    globalEnvironment.register("string-append", "str-append", new StringAppendProcedure());
+    globalEnvironment.register("string->list", "str->list", new StringToListProcedure());
+    globalEnvironment.register("list->string", "list->str", new ListToStringProcedure());
 
     // SECTION 6.8 VECTORS
-    globalEnvironment.register(new String[] { "vector?", "vec?" }, new VectorQProcedure());
-    globalEnvironment.register(new String[] { "make-vector", "make-vec" }, new MakeVectorProcedure());
-    globalEnvironment.register(new String[] { "vector", "vec" }, new VectorProcedure());
-    globalEnvironment.register(new String[] { "vector-length", "vec-len" }, new VectorLengthProcedure());
-    globalEnvironment.register(new String[] { "vector-ref", "vec-ref" }, new VectorRefProcedure());
-    globalEnvironment.register(new String[] { "vector-set", "vec-set" }, new VectorSetProcedure());
-    globalEnvironment.register(new String[] { "vector->list", "vec->list" }, new VectorToListProcedure());
-    globalEnvironment.register(new String[] { "list->vector", "list->vec" }, new ListToVectorProcedure());
+    globalEnvironment.register("vector?", "vec?", new VectorQProcedure());
+    globalEnvironment.register("make-vector", "make-vec", new MakeVectorProcedure());
+    globalEnvironment.register("vector", "vec", new VectorProcedure());
+    globalEnvironment.register("vector-length", "vec-len", new VectorLengthProcedure());
+    globalEnvironment.register("vector-ref", "vec-ref", new VectorRefProcedure());
+    globalEnvironment.register("vector-set", "vec-set", new VectorSetProcedure());
+    globalEnvironment.register("vector->list", "vec->list", new VectorToListProcedure());
+    globalEnvironment.register("list->vector", "list->vec", new ListToVectorProcedure());
 
     // SECTION 6.9 CONTROL FEATURES
     globalEnvironment.register("apply", new ApplyProcedure());

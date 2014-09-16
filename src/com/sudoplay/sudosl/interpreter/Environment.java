@@ -90,10 +90,9 @@ public class Environment {
     return this;
   }
 
-  public Environment register(String[] names, BuiltInProcedure procedure) {
-    for (String name : names) {
-      define(name, procedure);
-    }
+  public Environment register(String name, String shortName, BuiltInProcedure procedure) {
+    define(name, procedure);
+    define(shortName, procedure);
     return this;
   }
 
