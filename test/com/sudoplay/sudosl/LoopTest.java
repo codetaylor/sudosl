@@ -17,7 +17,8 @@ public class LoopTest {
       scheme.load(this.getClass().getResourceAsStream("unit-test.script"));
       scheme.load(this.getClass().getResourceAsStream("loop-test.script"));
     } catch (Exception e) {
-      fail(e.getMessage());
+      e.printStackTrace();
+      fail();
     }
 
   }

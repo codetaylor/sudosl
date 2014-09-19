@@ -17,7 +17,8 @@ public class ControlTest {
       scheme.load(this.getClass().getResourceAsStream("unit-test.script"));
       scheme.load(this.getClass().getResourceAsStream("control-test.script"));
     } catch (Exception e) {
-      fail(e.getMessage());
+      e.printStackTrace();
+      fail();
     }
 
   }

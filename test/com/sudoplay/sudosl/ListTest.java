@@ -17,7 +17,8 @@ public class ListTest {
       scheme.load(this.getClass().getResourceAsStream("unit-test.script"));
       scheme.load(this.getClass().getResourceAsStream("list-test.script"));
     } catch (Exception e) {
-      fail(e.getMessage());
+      e.printStackTrace();
+      fail();
     }
 
   }

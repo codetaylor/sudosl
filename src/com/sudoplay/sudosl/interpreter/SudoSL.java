@@ -9,11 +9,7 @@ import java.util.Stack;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sudoplay.sudosl.builtin.ConsProcedure;
-import com.sudoplay.sudosl.builtin.EvalProcedure;
-import com.sudoplay.sudosl.builtin.ExceptionProcedure;
 import com.sudoplay.sudosl.builtin.LoadProcedure;
-import com.sudoplay.sudosl.builtin.MapProcedure;
 import com.sudoplay.sudosl.builtin.PrintProcedure;
 import com.sudoplay.sudosl.builtin.booleans.BooleanQProcedure;
 import com.sudoplay.sudosl.builtin.booleans.NotProcedure;
@@ -28,10 +24,15 @@ import com.sudoplay.sudosl.builtin.characters.CharacterUppercaseQProcedure;
 import com.sudoplay.sudosl.builtin.characters.CharacterWhitespaceQProcedure;
 import com.sudoplay.sudosl.builtin.characters.IntegerToCharacterProcedure;
 import com.sudoplay.sudosl.builtin.control.ApplyProcedure;
+import com.sudoplay.sudosl.builtin.control.CallCCProcedure;
+import com.sudoplay.sudosl.builtin.control.EvalProcedure;
+import com.sudoplay.sudosl.builtin.control.ExceptionProcedure;
+import com.sudoplay.sudosl.builtin.control.MapProcedure;
 import com.sudoplay.sudosl.builtin.equivalence.EQQProcedure;
 import com.sudoplay.sudosl.builtin.equivalence.EQVQProcedure;
 import com.sudoplay.sudosl.builtin.equivalence.EqualQProcedure;
 import com.sudoplay.sudosl.builtin.lists.AppendProcedure;
+import com.sudoplay.sudosl.builtin.lists.ConsProcedure;
 import com.sudoplay.sudosl.builtin.lists.FirstProcedure;
 import com.sudoplay.sudosl.builtin.lists.LengthProcedure;
 import com.sudoplay.sudosl.builtin.lists.ListProcedure;
@@ -247,14 +248,15 @@ public class SudoSL {
     globalEnvironment.register("list->vector", "list->vec", new ListToVectorProcedure());
 
     // SECTION 6.9 CONTROL FEATURES
+    globalEnvironment.register("eval", new EvalProcedure());
     globalEnvironment.register("apply", new ApplyProcedure());
-
-    globalEnvironment.register("load", new LoadProcedure());
-    globalEnvironment.register("print", new PrintProcedure());
+    globalEnvironment.register("map", new MapProcedure());
+    globalEnvironment.register("call-cc", new CallCCProcedure());
     globalEnvironment.register("throw", new ExceptionProcedure());
 
-    globalEnvironment.register("map", new MapProcedure());
-    globalEnvironment.register("eval", new EvalProcedure());
+    // SECTION 6.10 INPUT AND OUPUT
+    globalEnvironment.register("load", new LoadProcedure());
+    globalEnvironment.register("print", new PrintProcedure());
 
   }
 
@@ -417,21 +419,50 @@ public class SudoSL {
             }
             x = null;
 
+          } else if (Keyword.FOREACH.equals(fn)) {
+
+            //env = new Environment(env);
+
+            Object var;
+            Object val;
+            Object list;
+            Object block;
+
+            var = Util.first(args);
+            args = Util.rest(args);
+            list = eval(Util.first(args), env);
+            //val = Util.first(list);
+            block = Util.rest(args);
+
+            //env.define(var, val);
+
+            Closure closure = new Closure(var, block, env);
+            do {
+              val = Util.first(list);
+              closure.apply(this, val);
+            } while ((list = Util.rest(list)) != null);
+            x = null;
+
           } else if (Keyword.FOR.equals(fn)) {
 
             env = new Environment(env);
 
-            Object var = Util.first(args);
+            Object var;
+            Object val;
+            Object predicate;
+            Object operation;
+
+            var = Util.first(args);
             args = Util.rest(args);
 
-            Object val = Util.first(args);
+            val = Util.first(args);
             env.define(var, eval(val, env));
             args = Util.rest(args);
 
-            Object predicate = Util.first(args);
+            predicate = Util.first(args);
             args = Util.rest(args);
 
-            Object operation = Util.first(args);
+            operation = Util.first(args);
             Closure closure = new Closure(var, Util.rest(args), env);
             while (Util.truth(eval(predicate, env))) {
               closure.apply(this, val);

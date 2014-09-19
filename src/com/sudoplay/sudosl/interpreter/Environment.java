@@ -19,10 +19,14 @@ public class Environment {
 
   public Environment(Object vars, Object vals, Environment newParentEnvironment) {
     Object varList = vars, valList = vals;
-    while (varList != null) {
-      mapDataVars.put(Util.first(varList), Util.first(valList));
-      varList = Util.rest(varList);
-      valList = Util.rest(valList);
+    if (varList instanceof Pair) {
+      while (varList != null) {
+        mapDataVars.put(Util.first(varList), Util.first(valList));
+        varList = Util.rest(varList);
+        valList = Util.rest(valList);
+      }
+    } else {
+      mapDataVars.put(varList, valList);
     }
     parentEnvironment = newParentEnvironment;
   }
