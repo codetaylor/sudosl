@@ -421,8 +421,6 @@ public class SudoSL {
 
           } else if (Keyword.FOREACH.equals(fn)) {
 
-            //env = new Environment(env);
-
             Object var;
             Object val;
             Object list;
@@ -431,10 +429,7 @@ public class SudoSL {
             var = Util.first(args);
             args = Util.rest(args);
             list = eval(Util.first(args), env);
-            //val = Util.first(list);
             block = Util.rest(args);
-
-            //env.define(var, val);
 
             Closure closure = new Closure(var, block, env);
             do {
